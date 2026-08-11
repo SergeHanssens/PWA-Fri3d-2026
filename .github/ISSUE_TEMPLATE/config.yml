@@ -1,0 +1,14 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Ik wil de app gewoon gebruiken
+    url: https://github.com/SergeHanssens/PWA-Fri3d-2026/blob/main/docs/GEBRUIKEN.md
+    about: Uitleg in gewone taal over installeren, planning maken, voorlezen en meldingen.
+  - name: Ik wil de app zelf online zetten
+    url: https://github.com/SergeHanssens/PWA-Fri3d-2026/blob/main/docs/START-HIER.md
+    about: Stap voor stap, zonder voorkennis van Netlify of Supabase.
+  - name: Iets over het programma van Fri3d Camp zelf
+    url: https://fri3d.be
+    about: Vragen over sessies, uren of locaties horen bij de organisatie, niet hier.
+  - name: Een beveiligingsprobleem melden
+    url: https://github.com/SergeHanssens/PWA-Fri3d-2026/security/advisories/new
+    about: Meld dat privé, niet in een publiek issue.

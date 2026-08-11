@@ -1,0 +1,22 @@
+# Regeleindes normaliseren: LF in de repo, native in je werkmap.
+* text=auto eol=lf
+
+# Windows-scripts blijven CRLF.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# Binaire bestanden nooit als tekst behandelen.
+*.png   binary
+*.jpg   binary
+*.ico   binary
+*.woff  binary
+*.woff2 binary
+*.pdf   binary
+
+# Gegenereerd of overgenomen materiaal niet meetellen in de taalstatistieken
+# van GitHub, en standaard dichtgeklapt tonen in diffs.
+public/index.html            linguist-generated=true
+build/schedule-snapshot.json linguist-generated=true
+public/fonts/*               linguist-vendored=true
+docs/*.md                    linguist-documentation=true

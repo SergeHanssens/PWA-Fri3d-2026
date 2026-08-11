@@ -1,0 +1,68 @@
+name: Er gaat iets mis
+description: Meld iets dat niet werkt zoals het hoort.
+title: "[bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Bedankt om de moeite te doen. Hoe concreter, hoe sneller het opgelost is.
+        **Gaat het over beveiliging?** Meld dat niet hier, maar via
+        Security → Report a vulnerability. Zie `SECURITY.md`.
+  - type: textarea
+    id: wat
+    attributes:
+      label: Wat gebeurt er?
+      description: Beschrijf wat je zag. Een schermafbeelding of schermopname helpt enorm.
+    validations:
+      required: true
+  - type: textarea
+    id: verwacht
+    attributes:
+      label: Wat had je verwacht?
+    validations:
+      required: true
+  - type: textarea
+    id: stappen
+    attributes:
+      label: Hoe doe ik het na?
+      placeholder: |
+        1. Open de app
+        2. Ga naar tabblad ...
+        3. Tik op ...
+    validations:
+      required: true
+  - type: dropdown
+    id: onderdeel
+    attributes:
+      label: Waar zit het?
+      options:
+        - Programma en tabbladen
+        - Persoonlijke planning
+        - Voorlezen
+        - Meldingen of agenda-export
+        - Terreinkaart
+        - Synchronisatie of delen
+        - Installeren of offline werken
+        - Iets anders
+    validations:
+      required: true
+  - type: input
+    id: toestel
+    attributes:
+      label: Toestel en browser
+      placeholder: "bv. iPhone 12, Safari 17 — of Windows 11, Chrome 128"
+    validations:
+      required: true
+  - type: input
+    id: adres
+    attributes:
+      label: Op welk adres draait de app?
+      placeholder: "bv. https://fri3d-planner.netlify.app of lokaal via python3 -m http.server"
+  - type: checkboxes
+    id: check
+    attributes:
+      label: Even nagekeken
+      options:
+        - label: Ik gebruik Chrome of Safari zelf, niet de browser in WhatsApp of Messenger.
+        - label: Ik heb één keer hard herladen geprobeerd.

@@ -1,0 +1,13 @@
+Space Grotesk en Inter staan onder de SIL Open Font License, versie 1.1.
+
+Space Grotesk — Copyright (c) Florian Karsten, gebaseerd op Space Mono
+  van Colophon Foundry voor Google.
+Inter — Copyright (c) The Inter Project Authors.
+
+De volledige licentietekst: https://openfontlicense.org
+Bronnen: https://fonts.google.com/specimen/Space+Grotesk
+         https://fonts.google.com/specimen/Inter
+
+Deze bestanden zijn meegeleverd zodat de app offline haar typografie behoudt.
+Ze mogen vrij worden hergebruikt en aangepast onder de voorwaarden van de OFL;
+ze mogen niet apart worden verkocht.

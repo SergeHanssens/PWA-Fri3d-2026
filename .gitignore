@@ -1,0 +1,30 @@
+# Besturingssysteem
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Python en Node
+__pycache__/
+*.pyc
+.venv/
+venv/
+node_modules/
+
+# Geheimen — nooit committen
+.env
+.env.*
+*.pem
+
+# Gegenereerd of tijdelijk
+*.ics
+.netlify/
+*.log
+
+# Lokale notitie over het aanmaken van deze repo; hoort niet in de
+# geschiedenis. Verwijderen mag.
+/PUSH.md

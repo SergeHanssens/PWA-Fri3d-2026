@@ -1,0 +1,49 @@
+name: Een idee
+description: Stel iets voor dat de app beter maakt.
+title: "[idee] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Houd er rekening mee dat dit project bewust zonder afhankelijkheden,
+        bundler of framework werkt. Ideeën die dat overeind laten, maken de
+        meeste kans.
+  - type: textarea
+    id: probleem
+    attributes:
+      label: Welk probleem los je hiermee op?
+      description: Beschrijf de situatie, niet meteen de oplossing.
+      placeholder: "Als ik 's ochtends met mijn zoon de dag overloop, kan ik niet ..."
+    validations:
+      required: true
+  - type: textarea
+    id: idee
+    attributes:
+      label: Wat stel je voor?
+    validations:
+      required: true
+  - type: textarea
+    id: alternatief
+    attributes:
+      label: Heb je iets anders overwogen?
+  - type: dropdown
+    id: soort
+    attributes:
+      label: Wat voor idee is het?
+      options:
+        - Toegankelijkheid (voorlezen, contrast, grote letters)
+        - Programma, labels of tabbladen
+        - Planning, delen of synchronisatie
+        - Terreinkaart
+        - Een ander evenement of andere Pretalx-bron
+        - Vertaling
+        - Iets anders
+    validations:
+      required: true
+  - type: checkboxes
+    id: helpen
+    attributes:
+      label: Wil je meehelpen?
+      options:
+        - label: Ik wil hier zelf een pull request voor maken.
