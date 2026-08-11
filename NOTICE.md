@@ -57,6 +57,13 @@ verspreid.
 Voor een ander evenement: vervang `kaart.png` en pas `build/mapcoords.json` aan.
 Dat bestand bevat enkel coördinaten, geen beeldmateriaal.
 
+### Schermafbeeldingen
+`docs/screenshots/` bevat afbeeldingen van de app in gebruik, enkel als
+illustratie bij de README en de handleiding. Daarop staan onvermijdelijk het
+vossenlogo, de terreinkaart en fragmenten van het programma van Fri3d Camp; die
+blijven van hen, onder dezelfde toestemming als hierboven. De getoonde namen en
+planningen zijn verzonnen — er staan geen gegevens van echte deelnemers op.
+
 ## Diensten van derden
 - **Supabase** — optioneel, voor synchronisatie tussen toestellen. Je gebruikt
   je eigen project; er loopt niets via SHiftEDMake.

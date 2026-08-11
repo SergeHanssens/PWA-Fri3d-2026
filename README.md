@@ -10,6 +10,10 @@
 </p>
 
 <p align="center">
+  <img src="docs/screenshots/00-hero.png" alt="Het programma, de terreinkaart en het tabblad Praktisch" width="820">
+</p>
+
+<p align="center">
   <a href="LICENSE"><img alt="MIT" src="https://img.shields.io/badge/code-MIT-8835C9"></a>
   <img alt="geen build" src="https://img.shields.io/badge/build-geen%20stap%20nodig-101010">
   <img alt="offline" src="https://img.shields.io/badge/werkt-offline-3CE8B3">
@@ -87,6 +91,51 @@ telefoon af, ook als de app dicht is.
 | **Kampvuurmodus** | Amberkleurig scherm dat 's avonds je nachtzicht spaart |
 | **Offline** | Het volledige programma zit in het bestand; internet is enkel voor updates |
 
+## Zo ziet het eruit
+
+<table>
+<tr>
+<td width="33%" valign="top">
+<img src="docs/screenshots/01-programma.png" alt="Lijst met sessies per persoon">
+<sub><b>Je eigen dag.</b> Elke sessie toont uur, zaal, spreker en vier gekleurde
+knoppen — één per gezinslid. Eén tik zet iets in of uit hun planning.</sub>
+</td>
+<td width="33%" valign="top">
+<img src="docs/screenshots/03-kaart.png" alt="Terreinkaart met het icoon in het rood">
+<sub><b>Waar is het?</b> Eén kaartbestand; de app kleurt de donkere pixels van
+precies dat ene icoon rood, op de kaart én in de legende.</sub>
+</td>
+<td width="33%" valign="top">
+<img src="docs/screenshots/04-praktisch.png" alt="Tabblad Praktisch met kosten en meebrengen">
+<sub><b>Praktisch.</b> Wat kost geld, wat moet je meebrengen, waar heb je een
+laptop bij nodig — met de letterlijke zin uit de beschrijving.</sub>
+</td>
+</tr>
+<tr>
+<td valign="top">
+<img src="docs/screenshots/02-personen.png" alt="Scherm om van persoon te wisselen">
+<sub><b>Wie ben je?</b> Personen aanmaken, hernoemen, een avatar of foto geven
+en verwijderen. Hier zitten ook meldingen, synchronisatie en de agenda-export.</sub>
+</td>
+<td valign="top">
+<img src="docs/screenshots/05-leeftijd.png" alt="Tabblad Leeftijd">
+<sub><b>Leeftijd.</b> Uitsluitend wat de sessies zélf vermelden, plus de twee
+kinderzalen. Het kader zegt er eerlijk bij wat er níét in staat.</sub>
+</td>
+<td valign="top">
+<img src="docs/screenshots/06-kampvuur.png" alt="Kampvuurmodus in amberkleuren">
+<sub><b>Kampvuurmodus.</b> Amber in plaats van blauw licht, zodat je scherm
+'s avonds niemands nachtzicht sloopt.</sub>
+</td>
+</tr>
+</table>
+
+<p align="center">
+  <img src="docs/screenshots/07-voorlezen.png" alt="Instellingen voor voorlezen" width="300">
+</p>
+<p align="center"><sub><b>Voorlezen.</b> Stem, tempo, en de schakelaar die ook knoppen
+en tabbladen uitspreekt zodra je ze aanraakt — voor wie niet vlot leest.</sub></p>
+
 ## Snel starten
 
 Je hebt geen buildstap, geen npm en geen server nodig. De `public/`-map ís de
@@ -159,8 +208,8 @@ de app, elke 45 seconden zolang ze zichtbaar is, en zodra het toestel weer
 online komt. Aanpassingen gaan anderhalve seconde na je laatste tik omhoog.
 
 **Botsingen** worden per persoon opgelost: wie het laatst iets aan die persoon
-wijzigde, wint. Jij kan dus Mala's lijst samenstellen terwijl zij aan de hare
-werkt, zonder elkaar te overschrijven — tenzij jullie exact dezelfde persoon
+wijzigde, wint. Je kan dus de lijst van je kind samenstellen terwijl het zelf
+aan de zijne werkt, zonder elkaar te overschrijven — tenzij jullie exact dezelfde persoon
 tegelijk aanpassen.
 
 ### Hoe veilig is dit?
@@ -254,9 +303,12 @@ onder kaarten en knoppen — die "sticker"-look die de site ook gebruikt.
 
 Van **SHiftEDMake** komt de warmte: navy inkt op warm papier, Space Grotesk
 voor koppen, Inter voor lopende tekst, en de vier logokleuren die hier dienstdoen
-als identiteit per gezinslid. Serge is paars, Kathy koraal, Jago teal, Mala amber
-— dezelfde kleur zie je terug in de chip, de avatar en de planningsknop, zodat je
+als identiteit per gezinslid: paars, koraal, teal en amber, in die volgorde.
+Dezelfde kleur zie je terug in de chip, de avatar en de planningsknop, zodat je
 nooit hoeft te lezen wie waar staat.
+
+> De namen in de schermafbeeldingen zijn bewust neutraal. De app zelf gebruikt
+> gewoon de namen die je invult.
 
 De monospace is er voor de geeky details: uren, zalen, tellers, statusregels.
 Inhoud in Inter, machinerie in mono.
@@ -274,6 +326,7 @@ lokaal in `public/fonts/`, dus offline ziet alles er hetzelfde uit.
 docs/              handleidingen voor niet-technische gebruikers
   START-HIER.md    de app online zetten, zonder voorkennis
   GEBRUIKEN.md     de app dagelijks gebruiken
+  screenshots/     schermafbeeldingen voor deze README en de handleiding
 public/            de volledige site — hier staat alles wat je deployt
   index.html       de app, met het programma erin gebakken (± 160 kB)
   sw.js            service worker: offline shell en meldingsklikken

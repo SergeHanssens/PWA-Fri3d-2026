@@ -20,7 +20,9 @@ Eerste publieke versie.
 - Leeftijdstabblad op basis van wat de sessies zelf vermelden.
 - Apart tabblad Praktisch voor meebrengen, kosten en laptop.
 - Lege lijsten zeggen nu welk filter in de weg staat, met een knop om het te wissen.
-- Het Fri3d-vossenlogo opnieuw getekend na opmeting van de officiële versie.
+- Het Fri3d-vossenlogo opnieuw getekend na opmeting van de officiële versie, en
+  daarna vervangen door het originele logo met transparante achtergrond.
+- Schermafbeeldingen in de README en de gebruikershandleiding.
 - Labels voor meebrengen, bijdrage en laptop, met de letterlijke zin uit de
   beschrijving en een amberkleurige rand op de kaart.
 - Vormgeving die de huisstijl van Fri3d Camp en SHiftEDMake combineert;

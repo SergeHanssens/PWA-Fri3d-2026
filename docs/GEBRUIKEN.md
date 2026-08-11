@@ -20,6 +20,10 @@ in het scherm zie je voortaan een gekleurd rondje met je initiaal.
 
 ---
 
+<p align="center">
+  <img src="screenshots/01-programma.png" alt="Het programma met je eigen selectie" width="300">
+</p>
+
 ## De vier knoppen bovenaan
 
 | | |
@@ -75,6 +79,10 @@ voorbereiding.
 
 ## Voorlezen
 
+<p align="center">
+  <img src="screenshots/07-voorlezen.png" alt="Instellingen voor voorlezen" width="300">
+</p>
+
 Bij elke activiteit staat **🔊 LEES VOOR**. Eén tik en je hoort tijd, plaats,
 titel en begeleider.
 
@@ -97,6 +105,10 @@ Via 🎚 kan je nog kiezen:
 > één tik op te lossen.
 
 ## Waar is het?
+
+<p align="center">
+  <img src="screenshots/03-kaart.png" alt="De terreinkaart met het icoon in het rood" width="300">
+</p>
 
 Bij elke activiteit staat **📍 KAART**. Je krijgt de terreinkaart te zien met
 dat ene icoontje **in het rood** — ook in de legende rechts, zodat je meteen
