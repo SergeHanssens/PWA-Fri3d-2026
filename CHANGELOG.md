@@ -1,5 +1,18 @@
 # Wijzigingen
 
+## 1.2.4 — augustus 2026
+
+Namen uit de groep kwamen nog steeds niet op je scherm. Twee oorzaken:
+
+- **De naam werd alleen overgenomen als de planning in de database nieuwer was
+  dan die op het toestel.** Dat is ze niet wanneer beide van dezelfde bewerking
+  afstammen — dan is ze even oud, en bleef de ingebouwde naam staan. Toont een
+  toestel voor een persoon nog de fabrieksnaam, dan wint de naam uit de groep nu
+  altijd.
+- **Een gewijzigde naam werd wel bewaard, maar het scherm niet vernieuwd.** Je
+  zag ze dus pas na een herlaadbeurt. De app tekent nu ook opnieuw wanneer enkel
+  een naam of avatar veranderde.
+
 ## 1.2.3 — augustus 2026
 
 - **Een potloodje bij elke persoon.** Tot nu kon je alleen bewerken wie je op dat

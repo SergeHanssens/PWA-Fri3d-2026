@@ -592,6 +592,7 @@ const themes = (DATA.themes || []).filter(([k])=>!k.startsWith("prep-"));
 /* Personen zijn bewerkbaar. De vier uit het voorstel zijn "builtin": hun
    ingebouwde selectie blijft gelden. Zelf aangemaakte personen starten leeg. */
 const BUILTIN = DATA.people.map(([id,label])=>({id,label,avatar:"",builtin:true}));
+const FABRIEKSNAAM = new Map(DATA.people);   // om te zien of een naam nog nooit aangepast is
 let roster = store.get("roster", null) || BUILTIN.map(p=>({...p}));
 const peopleList = () => roster.filter(p=>!p.deleted).map(p=>[p.id, p.label]);
 const personOf = id => roster.find(p=>p.id===id && !p.deleted);
@@ -1455,6 +1456,17 @@ async function famPush(rows){
   }
   if(!r.ok) throw new Error("schrijven " + await famErr(r));
 }
+/* naam en avatar uit de groep overnemen; een eigen foto blijft altijd lokaal.
+   Geeft terug of er echt iets veranderde, want daar hangt af of het scherm
+   opnieuw getekend moet worden. */
+function naamOver(mine, r){
+  let veranderd = false;
+  if(r.label && mine.label !== r.label){ mine.label = r.label; veranderd = true }
+  if(r.avatar && mine.avatar !== r.avatar && !(mine.avatar||"").startsWith("data:")){
+    mine.avatar = r.avatar; veranderd = true;
+  }
+  return veranderd;
+}
 function rowFor(who, loc){
   const p = roster.find(x=>x.id===who) || {label:who};
   return {group_id: fam.grp, person: who, label: p.label, avatar: (p.avatar||"").startsWith("data:") ? "" : (p.avatar||""),
@@ -1475,15 +1487,23 @@ async function famSync(){
     const remote = [...seen.values()];
     const byPerson = new Map(remote.map(r=>[r.person, r]));
     /* personen die elders zijn aangemaakt of verwijderd overnemen */
+    let namenGewijzigd = false;
     for(const r of remote){
       const mine = roster.find(x=>x.id===r.person);
       if(!mine){
         roster.push({id:r.person, label:r.label||r.person, avatar:r.avatar||"", builtin:false, deleted:!!r.deleted});
         plans[r.person] = {add:r.add||[], rm:r.rm||[], ts:r.ts||0};
+        namenGewijzigd = true;
       }else if((r.ts||0) > (plans[r.person]?.ts||0)){
-        if(r.label) mine.label = r.label;
-        if(r.avatar && !(mine.avatar||"").startsWith("data:")) mine.avatar = r.avatar;
-        mine.deleted = !!r.deleted;
+        if(naamOver(mine, r)) namenGewijzigd = true;
+        if(mine.deleted !== !!r.deleted){ mine.deleted = !!r.deleted; namenGewijzigd = true }
+      }else if(mine.builtin && FABRIEKSNAAM.get(mine.id) === mine.label){
+        /* Dit toestel toont voor deze persoon nog de ingebouwde naam, dus is er
+           hier nog nooit iets aan gewijzigd. Dan is de naam uit de groep altijd
+           beter, óók als de planning even oud is. Dat laatste is precies wat
+           gebeurt wanneer beide kanten van dezelfde bewerking afstammen: de
+           vergelijking op ouderdom gaat dan niet op en de naam bleef hangen. */
+        if(naamOver(mine, r)) namenGewijzigd = true;
       }
     }
     for(const p of roster){
@@ -1508,7 +1528,10 @@ async function famSync(){
       }
     }
     await famPush(push);
-    if(changed){ store.set("plans", plans); renderWho(); render(); renderNotifState(); }
+    if(changed) store.set("plans", plans);
+    /* ook opnieuw tekenen als alleen een naam of avatar wijzigde: anders staat
+       de nieuwe naam wel in de opslag, maar zie je hem pas na een herlaadbeurt */
+    if(changed || namenGewijzigd){ renderWho(); render(); renderNotifState(); }
     famNote = "gezin ✓";
   }catch(e){
     famNote = "gezin ✗ " + e.message;
@@ -1997,7 +2020,7 @@ async function sync(silent){
 /* Staat in de voettekst. Zonder dit is van buitenaf niet te zien welke versie
    er op een toestel draait, en dat maakt "ik heb ververst maar zie het niet"
    onmogelijk om na te gaan. */
-const VERSIE = "1.2.3";
+const VERSIE = "1.2.4";
 $("#versie").textContent = VERSIE;
 render();
 if(!st.me){ try{ dlgMe.showModal() }catch(e){} }
