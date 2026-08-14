@@ -14,9 +14,9 @@
 </p>
 
 <p align="center">
-  <a href="LICENSE"><img alt="MIT" src="https://img.shields.io/badge/code-MIT-8835C9"></a>
-  <img alt="geen build" src="https://img.shields.io/badge/build-geen%20stap%20nodig-101010">
-  <img alt="offline" src="https://img.shields.io/badge/werkt-offline-3CE8B3">
+  <a href="LICENSE"><img alt="MIT" src="https://img.shields.io/badge/code-MIT-6E3FA3"></a>
+  <img alt="geen build" src="https://img.shields.io/badge/build-geen%20stap%20nodig-1E2B36">
+  <img alt="offline" src="https://img.shields.io/badge/werkt-offline-12706C">
 </p>
 
 ---
@@ -295,26 +295,35 @@ uur, duur, zaal, titel, sprekers, taal en beschrijving.
 
 ## Vormgeving
 
-De app leent van twee huisstijlen tegelijk.
+De vormgeving is die van **SHiftEDMake**: navy inkt op warm papier, Space
+Grotesk voor koppen, Inter voor lopende tekst. Sinds 1.1.0 leent de app niets
+meer van de huisstijl van Fri3d Camp — dat is bewust, zodat meteen duidelijk is
+dat dit een project ernaast is en niet de officiële app.
 
-Van **Fri3d Camp** komt de structuur: zwarte balken, oranje `#FFAD64`, paars
-`#8835C9`, mint `#3CE8B3`, de diagonale arceringen en de harde offset-schaduw
-onder kaarten en knoppen — die "sticker"-look die de site ook gebruikt.
+| | |
+|---|---|
+| Papier `#FAF7F2` · inkt `#1E2B36` | de basis; balken boven en onder dragen dezelfde navy |
+| Paars `#6E3FA3`, inkt `#5A2E88` | selectie, links, focusring — alles wat "jij koos dit" betekent |
+| Teal `#12706C` | bevestiging: de zaal, voorlezen, nieuwe sessies, synchronisatie in orde |
+| Amber `#F2B33D` | let op: kosten, voorbereiding |
+| Rood `#C8322A` | wat nu bezig is, en wat geschrapt werd |
 
-Van **SHiftEDMake** komt de warmte: navy inkt op warm papier, Space Grotesk
-voor koppen, Inter voor lopende tekst, en de vier logokleuren die hier dienstdoen
-als identiteit per gezinslid: paars, koraal, teal en amber, in die volgorde.
-Dezelfde kleur zie je terug in de chip, de avatar en de planningsknop, zodat je
+Kaarten en knoppen staan op een zachte schaduw en een dunne warme rand, geen
+harde offset. Scheidingen zijn haarlijnen. De acht persoonskleuren zijn dieper
+gekozen dan vroeger, zodat de witte initiaal in elke avatar leesbaar blijft;
+dezelfde kleur zie je terug in de chip, de avatar en de planningsknop, zodat je
 nooit hoeft te lezen wie waar staat.
 
-> De namen in de schermafbeeldingen zijn bewust neutraal. De app zelf gebruikt
-> gewoon de namen die je invult.
+> De vier ingebouwde personen heten Ouder A, Ouder B, Tiener en Kind. Dat is
+> alles wat in de code staat — de namen die jij invult, blijven op je eigen
+> toestel.
 
 De monospace is er voor de geeky details: uren, zalen, tellers, statusregels.
 Inhoud in Inter, machinerie in mono.
 
 **Toegankelijkheid is nagerekend, niet gehoopt.** Alle tekstcombinaties halen
-WCAG AA: 13,5:1 voor lopende tekst, 4,6:1 voor de kleinste labels. Tikdoelen zijn
+WCAG AA, in beide standen: 13,5:1 voor lopende tekst, 4,7:1 voor de kleinste
+labels — dat laatste is meteen de laagste waarde in de hele app. Tikdoelen zijn
 minstens 44 pixels, de focusring is 3 pixels paars en overal zichtbaar,
 `prefers-reduced-motion` wordt gerespecteerd, en de statusregel is een
 `role="status"` zodat schermlezers wijzigingen meekrijgen. De lettertypen staan

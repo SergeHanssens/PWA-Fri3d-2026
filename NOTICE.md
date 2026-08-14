@@ -27,6 +27,12 @@ Die toestemming geldt voor dit project. Fork je het voor een ander evenement,
 dan staat dat daar los van — vervang in dat geval de iconen en de kaart door je
 eigen beeldmateriaal.
 
+**De vormgeving is die van SHiftEDMake, niet van Fri3d Camp.** Sinds 1.1.0
+gebruikt de app geen enkele kleur of vormtaal uit de huisstijl van Fri3d meer.
+Wat er van hen in zit, is beeldmateriaal en programmadata — hierboven benoemd —
+en niets anders. Zo blijft duidelijk dat dit een project ernaast is en niet de
+officiële app van het kamp.
+
 Wat mag zonder te vragen:
 - de app draaien, forken en aanpassen voor je eigen gezin of organisatie;
 - het logo laten staan als bronvermelding, zoals het in de voettekst staat.

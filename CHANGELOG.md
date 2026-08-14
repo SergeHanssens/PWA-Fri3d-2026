@@ -1,5 +1,25 @@
 # Wijzigingen
 
+## 1.1.0 — augustus 2026
+
+Eigen vormgeving, en geen persoonsgegevens meer in de broncode.
+
+- De huisstijl van Fri3d Camp is eruit. De app draagt nu enkel de vormgeving van
+  SHiftEDMake: navy inkt op warm papier, paars voor selectie, teal voor
+  bevestiging. Weg zijn de zwarte balken, het oranje, de mint, de diagonale
+  arceringen en de harde offset-schaduw.
+- De vier ingebouwde personen heten voortaan Ouder A, Ouder B, Tiener en Kind.
+  De namen die je zelf invult blijven op je eigen toestel staan.
+- Wie al een planning had, houdt ze: de oude persoonssleutels worden bij het
+  eerste openen eenmalig omgezet, ook in de synchronisatie tussen toestellen.
+- Toegankelijkheid opnieuw nagerekend en op drie plekken hersteld: de witte
+  initiaal in de avatars haalde AA niet (amber bleef op 1,9:1), het rood van
+  "nu bezig" zat op 4,4:1, en de kleinste labels op 3,0:1. Alles zit nu op
+  minstens 4,7:1, in dagmodus én kampvuurmodus.
+- Avatarinitialen komen uit alle woorden van de naam, dus Ouder A en Ouder B
+  zijn uit elkaar te houden.
+- Schermafbeeldingen opnieuw gemaakt in de nieuwe kleuren.
+
 ## 1.0.0 — augustus 2026
 Eerste publieke versie.
 
