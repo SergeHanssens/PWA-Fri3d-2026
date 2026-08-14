@@ -135,8 +135,12 @@ vraag. Onderaan elk blok staan de links naar de officiële pagina's.
 Alles staat mee in de app, dus je hebt er geen bereik voor nodig. Handig, want
 net op een veld werkt je internet meestal niet.
 
-Elk blok heeft een eigen **🔊 Lees voor**-knop, en met de grote knop onderaan
-laat je alles na elkaar voorlezen.
+De tien onderdelen staan dichtgeklapt, zodat je in één oogopslag ziet wat er is.
+Tik op een titel om hem open te doen, en nog eens om hem weer te sluiten.
+
+Naast elke titel staat een **🔊**. Daarmee laat je dat onderdeel voorlezen zónder
+het eerst te openen — het klapt vanzelf open zolang het gelezen wordt, zodat je
+kan meelezen. Met de grote knop onderaan gaan de tien onderdelen na elkaar.
 
 ---
 

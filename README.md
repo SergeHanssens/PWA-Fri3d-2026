@@ -76,7 +76,7 @@ telefoon af, ook als de app dicht is.
 | | |
 |---|---|
 | **Tabbladen** | Per persoon, per onderwerp, per leeftijd, per praktische vereiste, per locatie, alles, en Info |
-| **Info** | Alles uit de mails van de organisatie op één plek: aankomst, brandveiligheid, stroom, eten, meebrengen, contact — met de juiste links, en voorleesbaar |
+| **Info** | Alles uit de mails van de organisatie op één plek: aankomst, brandveiligheid, stroom, eten, meebrengen, contact — uitklapbaar, met de juiste links, en voorleesbaar |
 | **Leeftijd** | Alleen wat de sessies zélf vermelden, plus de twee kinderzalen — geen gokwerk |
 | **Praktisch** | Eigen tabblad met 🎒 meebrengen, 💶 kost iets en 💻 laptop nodig, met de letterlijke zin erbij |
 | **Eigen planning** | Tik een sessie bij eender wie in of uit; iedereen vertrekt van een voorstel |

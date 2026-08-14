@@ -237,7 +237,10 @@ footer .plate{display:inline-flex;align-items:center;padding:.45rem .7rem;border
   border:1px solid var(--line)}
 footer .plate img{height:34px;width:auto;display:block}
 footer .plate.sm{background:#fff}
-footer .plate.fri{background:var(--ink);border-color:var(--ink)}
+/* Het vossenlogo is licht en staat op een donkere plaat. Die plaat volgt
+   bewust niet de kampvuurmodus mee: met var(--ink) zou ze daar juist licht
+   worden en het logo onleesbaar. Vaste waarde dus, in beide standen gelijk. */
+footer .plate.fri{background:#1E2B36;border-color:#1E2B36}
 footer a{color:var(--purple-ink)}
 
 /* ---------------- voorleesbalk ---------------- */
@@ -293,20 +296,35 @@ dialog .chip[aria-pressed="true"]{background:var(--purple);border-color:var(--pu
 #mapCv{display:block;width:100%;height:auto}
 #dlgMap{max-width:min(94vw,920px);width:min(94vw,920px)}
 
-/* ---------------- kampinfo ---------------- */
+/* ---------------- kampinfo ----------------
+   Tien onderwerpen, standaard dichtgeklapt: eerst het overzicht, dan pas de
+   tekst. De titelbalk is de knop; het luidsprekertje ernaast leest het blok
+   voor zonder het te openen, want wie laat voorlezen hoeft niet te scrollen. */
 .info{max-width:840px;margin:0 auto;padding:.65rem .75rem 5.5rem}
-.card.ic{display:block;padding:.85rem .9rem}
-.card.ic h3{display:flex;align-items:baseline;gap:.5rem;margin:0 0 .4rem;font-size:1.06rem}
-.card.ic h3 .em{font-size:1.15rem;flex:none;line-height:1}
+.card.ic{display:block;padding:0;margin-top:0;overflow:hidden}
+.card.ic>summary{display:flex;align-items:center;gap:.55rem;padding:.6rem .7rem;
+  min-height:var(--tap);cursor:pointer;list-style:none;font-family:var(--disp);
+  font-weight:700;font-size:1.02rem;line-height:1.3;letter-spacing:0;
+  text-transform:none;color:var(--ink)}
+.card.ic>summary::-webkit-details-marker{display:none}
+.card.ic>summary::before{content:none}
+.card.ic>summary .em{font-size:1.2rem;flex:none;line-height:1}
+.card.ic>summary .ti{flex:1;min-width:0}
+.card.ic>summary .chev{flex:none;color:var(--ink-3);font-size:.8rem;
+  transition:transform .15s;transform-origin:50% 50%}
+.card.ic[open]>summary .chev{transform:rotate(90deg)}
+.card.ic[open]>summary{border-bottom:1px solid var(--line)}
+.card.ic>summary:hover{background:var(--panel-2)}
+.card.ic .say{flex:none;width:38px;height:38px;padding:0;border-radius:50%;
+  border:1.5px solid var(--ok);color:var(--ok-ink);background:var(--panel);
+  display:grid;place-items:center;font-size:.95rem}
+.card.ic .body{padding:.7rem .8rem .85rem}
 .card.ic ul{margin:0;padding-left:1.1rem;font-size:.92rem;color:var(--ink-2)}
 .card.ic li{margin:.3rem 0;line-height:1.5}
-.card.ic .kn{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.6rem}
+.card.ic .kn{display:flex;flex-wrap:wrap;gap:.35rem;margin:.6rem 0 0;white-space:normal}
 .card.ic .kn a{font-family:var(--mono);font-size:.64rem;letter-spacing:.05em;text-transform:uppercase;
   padding:.32rem .55rem;border-radius:9px;border:1.5px solid var(--purple);color:var(--purple-ink);
   text-decoration:none;font-weight:700;display:inline-flex;align-items:center;gap:.3rem;min-height:34px}
-.card.ic .say{margin-top:.6rem;font-family:var(--mono);font-size:.64rem;letter-spacing:.05em;
-  text-transform:uppercase;padding:.3rem .55rem;border-radius:9px;border:1.5px solid var(--ok);
-  color:var(--ok-ink);font-weight:700;min-height:36px}
 .infonote{margin:0 0 .7rem;padding:.55rem .75rem;border-radius:12px;background:var(--panel);
   border:1px dashed var(--line-2);font-size:.82rem;color:var(--ink-2);line-height:1.45}
 
@@ -542,6 +560,20 @@ const OLD_LABEL = {serge:"Serge", kathy:"Kathy", jago:"Jago", mala:"Mala"};
 })();
 
 let sessions = store.get("sessions", null) || DATA.sessions.map(s=>({...s}));
+/* De sessielijst wordt lokaal bewaard om wijzigingen in het programma bij te
+   houden: verplaatst, geschrapt, nieuw. Wat er bij het bouwen aan vastgemaakt
+   werd — de labels, de leeftijd en de praktische velden — hoort daar niet in
+   bevroren te raken. Anders blijft wie de app al eens opende hangen op de
+   labels van toen, en is er na een hernoeming geen enkele persoonslijst meer
+   die iets toont. Die velden komen dus altijd opnieuw uit DATA. */
+{
+  const BUILT = new Map(DATA.sessions.map(s=>[s.pid, s]));
+  sessions = sessions.map(s=>{
+    const b = BUILT.get(s.pid);
+    return b ? {...s, g:b.g, age:b.age, amin:b.amin, mee:b.mee,
+                kost:b.kost, doorons:b.doorons, bedrag:b.bedrag} : s;
+  });
+}
 let changelog = store.get("changelog", []);
 const rooms = DATA.rooms, ages = DATA.ages || [];
 const preps  = (DATA.themes || []).filter(([k])=>k.startsWith("prep-"));
@@ -858,16 +890,24 @@ function renderInfo(){
       dus ook zonder netwerk. Kwam er nadien nog een mail? Dan geldt die, en niet
       wat hieronder staat.</p>` +
     INFO.map((b,i)=>
-      `<article class="card ic" data-k="info:${i}">`
-      + `<h3><span class="em" aria-hidden="true">${b.i}</span>${esc(b.t)}</h3>`
-      + `<ul>` + b.l.map(x=>`<li>${esc(x)}</li>`).join("") + `</ul>`
-      + (b.k.length ? `<p class="kn">` + b.k.map(([t,u])=>
-          `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(t)} ↗</a>`).join("") + `</p>` : "")
-      + `<button class="say" data-info="${i}" data-say="1">🔊 Lees voor</button>`
-      + `</article>`).join("");
+      `<details class="card ic" data-k="info:${i}">`
+      + `<summary>`
+      +   `<span class="em" aria-hidden="true">${b.i}</span>`
+      +   `<span class="ti">${esc(b.t)}</span>`
+      +   `<button class="say" data-info="${i}" data-say="1" title="Dit onderdeel voorlezen"`
+      +     ` aria-label="${esc(b.t)} voorlezen">🔊</button>`
+      +   `<span class="chev" aria-hidden="true">▸</span>`
+      + `</summary>`
+      + `<div class="body">`
+      +   `<ul>` + b.l.map(x=>`<li>${esc(x)}</li>`).join("") + `</ul>`
+      +   (b.k.length ? `<p class="kn">` + b.k.map(([t,u])=>
+            `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(t)} ↗</a>`).join("") + `</p>` : "")
+      + `</div>`
+      + `</details>`).join("");
 }
 $("#infoPanel").addEventListener("click", e=>{
   const b = e.target.closest("button[data-info]"); if(!b) return;
+  e.preventDefault(); e.stopPropagation();      // niet ook nog uitklappen
   const blk = INFO[+b.dataset.info]; if(!blk) return;
   stopSpeak(); queue=[{k:`info:${b.dataset.info}`, txt:infoText(blk)}]; qi=0; runQueue();
 });
@@ -1759,11 +1799,20 @@ function utter(text){
   u.rate = voiceCfg.rate; u.pitch = 1;
   return u;
 }
+let autoOpen = null;   // door het voorlezen opengeklapt, niet door de gebruiker
 function highlight(k){
   document.querySelectorAll(".card.speaking").forEach(c=>c.classList.remove("speaking"));
-  if(!k) return;
+  if(!k){ if(autoOpen){ autoOpen.open=false; autoOpen=null } return }
   const c = document.querySelector(`.card[data-k="${CSS.escape(k)}"]`);
-  if(c){ c.classList.add("speaking"); c.scrollIntoView({block:"center",behavior:"smooth"}) }
+  if(!c) return;
+  c.classList.add("speaking");
+  /* Een dichtgeklapt infoblok gaat open zolang het voorgelezen wordt, zodat je
+     kan meelezen. Wat de gebruiker zelf openzette, blijft staan. */
+  if(c.tagName === "DETAILS" && !c.open){
+    if(autoOpen && autoOpen !== c) autoOpen.open = false;
+    c.open = true; autoOpen = c;
+  }
+  c.scrollIntoView({block:"center",behavior:"smooth"});
 }
 function stopSpeak(){ if(synth) synth.cancel(); queue=[]; qi=0; highlight(null); $("#readStatus").textContent="" }
 function runQueue(){

@@ -1,5 +1,24 @@
 # Wijzigingen
 
+## 1.2.1 — augustus 2026
+
+Herstel: lege lijsten na de hernoeming van 1.1.0.
+
+- **Wie de app al eens geopend had, zag al zijn lijsten op nul staan.** De
+  sessies worden lokaal bewaard om programmawijzigingen bij te houden, en de
+  labels die er bij het bouwen aan hingen bleven daarin bevroren op de oude
+  persoonssleutels. Labels, leeftijd en de praktische velden komen nu altijd
+  opnieuw uit de ingebouwde data. Er ging niets verloren: de planningen stonden
+  er nog, ze werden alleen nergens meer aan gekoppeld.
+- Het vossenlogo in de voettekst stond in kampvuurmodus op een crèmekleurige
+  plaat, waardoor het bijna onzichtbaar werd. Die plaat is nu in beide standen
+  even donker.
+- De tien onderdelen van het tabblad Info zijn **uitklapbaar**: je krijgt eerst
+  het overzicht, en klapt open wat je wil lezen. Het luidsprekertje staat in de
+  titelbalk, zodat je een onderdeel kan laten voorlezen zonder het te openen —
+  wie laat voorlezen scrollt niet graag. Tijdens het voorlezen klapt het blok
+  vanzelf open om mee te lezen.
+
 ## 1.2.0 — augustus 2026
 
 Een tabblad Info, zodat niemand nog in zijn mails hoeft te zoeken.
