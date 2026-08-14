@@ -1,0 +1,55 @@
+# Bewaakt de belofte dat public/index.html gegenereerd is uit build/.
+#
+# De app heeft geen buildstap bij het deployen: Netlify publiceert de map
+# public/ zoals ze in de repo staat. Dat is bewust — geen npm, geen bundler,
+# één bestand dat offline werkt. De prijs ervan is dat een gegenereerd bestand
+# mee in versiebeheer zit, en dat je het dus kan vergeten bij te werken.
+#
+# Wie build/app.template.html of build/build.py aanpast en vergeet
+#   cd build && python3 build.py
+# te draaien, zet zonder waarschuwing de oude app online. Deze controle bouwt
+# de app opnieuw en vergelijkt het resultaat met wat er in de repo staat.
+
+name: index.html komt overeen met de template
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+
+      - name: De app opnieuw bouwen
+        working-directory: build
+        run: python3 build.py
+
+      - name: Vergelijken met wat er in de repo staat
+        run: |
+          if git diff --quiet -- public/index.html; then
+            echo "public/index.html komt overeen met de template."
+            exit 0
+          fi
+          echo "::error file=public/index.html::index.html is niet opnieuw gebouwd na een wijziging in build/."
+          echo ""
+          echo "  public/index.html komt niet overeen met wat build.py uit de"
+          echo "  huidige template maakt. Netlify zou dus de oude app publiceren."
+          echo ""
+          echo "  Zo los je het op:"
+          echo "      cd build && python3 build.py"
+          echo "      git add public/index.html && git commit --amend --no-edit"
+          echo ""
+          echo "  Wat er verschilt:"
+          git --no-pager diff --stat -- public/index.html
+          exit 1

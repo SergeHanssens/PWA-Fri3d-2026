@@ -372,6 +372,8 @@ public/            de volledige site — hier staat alles wat je deployt
   shiftedmake-logo.png  het logo in de voettekst
   kaart.png        de terreinkaart
   fonts/           Space Grotesk en Inter (OFL)
+.github/workflows/
+  build-check.yml  controleert of index.html uit de template gebouwd is
 build/
   build.py         labelt de sessies en giet ze in de template
   app.template.html  de app zonder data
@@ -392,6 +394,54 @@ gedeelde planning in een link van een paar tientallen tekens.
 **Sessies worden geïdentificeerd door hun URL plus datum**, niet door hun uur.
 Verplaatst de organisatie iets, dan blijft het in je planning staan en zie je de
 verplaatsing in de wijzigingsbanner.
+
+## Automatisch bijwerken
+
+### Netlify zet elke push online
+
+Koppel je de repo één keer aan Netlify (*Add new site → Import an existing
+project*, of bij een bestaande site *Site configuration → Build & deploy → Link
+repository*), dan wordt elke push naar `main` vanzelf gepubliceerd.
+
+Je hoeft daar niets voor in te stellen: `netlify.toml` zegt al dat `public/` de
+site is en dat er geen buildcommando nodig is. Pull requests krijgen er gratis
+een deploy preview bij, op een eigen adres, voor je ze samenvoegt.
+
+De service worker zit niet in de weg. `netlify.toml` zet `Cache-Control:
+no-cache` op `sw.js`, `manifest.json` en `index.html`, zodat een bezoeker de
+nieuwe versie krijgt in plaats van de gecachete oude.
+
+### De controle die daarbij hoort
+
+Automatisch deployen legt een valkuil bloot die er zonder Netlify ook al was,
+maar dan zonder gevolgen. `public/index.html` is **gegenereerd**. Pas je
+`build/app.template.html` of `build/build.py` aan en vergeet je
+
+```bash
+cd build && python3 build.py
+```
+
+te draaien, dan publiceert Netlify braaf de oude app. Geen foutmelding, geen
+rode vlag — je wijziging is er gewoon niet, en je zoekt je een breuk.
+
+Daarom draait bij elke push en elke pull request
+[`.github/workflows/build-check.yml`](.github/workflows/build-check.yml). Die
+bouwt de app opnieuw uit de template en vergelijkt het resultaat met wat er in
+de repo staat. Verschilt er iets, dan faalt de controle met de commando's om het
+recht te zetten erbij.
+
+Het is een leescontrole: `permissions: contents: read`, geen secrets, en er wordt
+niets gedeployd of teruggeschreven. De build is deterministisch en gebruikt geen
+netwerk — alle gegevens zitten in `build/schedule-snapshot.json` — dus dezelfde
+invoer geeft altijd hetzelfde bestand.
+
+> **Zet hem als vereiste in.** Settings → Branches → Add branch protection rule
+> voor `main`, en vink de controle aan bij *Require status checks to pass*. Dan
+> kan een pull request met een vergeten rebuild niet meer binnengeraken.
+
+Regeleindes zijn geen probleem: `.gitattributes` normaliseert alles naar LF in de
+repo, dus een build op Windows en een build op de Linux-runner geven hetzelfde
+resultaat.
 
 ## Toegankelijkheid
 

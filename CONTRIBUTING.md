@@ -52,6 +52,8 @@ voor je een pull request opent.
 ## Voor je iets instuurt
 
 - [ ] `python3 build.py` gedraaid en `public/index.html` mee gecommit.
+      *(Een GitHub Action controleert dit bij elke pull request en faalt als je
+      het vergeet — zie de README, "Automatisch bijwerken".)*
 - [ ] De app geopend in Chrome én in Safari of Firefox.
 - [ ] Getest op een smal scherm (360 px breed) en met de leesbaarheidsstand aan.
 - [ ] Voorlezen werkt nog, ook op de knoppen die je aanraakte.
