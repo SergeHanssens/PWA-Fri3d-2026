@@ -1,5 +1,14 @@
 # Wijzigingen
 
+## 1.2.5 — augustus 2026
+
+- **Het app-icoon klopt nu met het echte logo.** De iconen waren nagetekend, en
+  dat zag je: de oren stonden anders en de lijnen waren dikker. Ze zijn nu
+  rechtstreeks uit `fri3d-logo.png` gemaakt — de PNG's als uitsnede, de SVG
+  overgetrokken tot vectorpaden. De achtergrond is de navy van de app in plaats
+  van zwart.
+- De offline cache kreeg een nieuw nummer, zodat het oude icoon er zeker uit gaat.
+
 ## 1.2.4 — augustus 2026
 
 Namen uit de groep kwamen nog steeds niet op je scherm. Twee oorzaken:

@@ -18,8 +18,10 @@ Serge Hanssens (SHiftEDMake).
 `public/icon.svg`, `public/icon-*.png`) en de **terreinkaart**
 (`public/kaart.png`) zijn het beeldmerk en het materiaal van Fri3d Camp, niet
 van SHiftEDMake. `fri3d-logo.png` is het originele logo, enkel vrijgemaakt van
-zijn zwarte achtergrond; de iconen zijn dezelfde vorm, nagetekend als vector
-zodat ze op elk formaat scherp blijven. Ze worden hier gebruikt met medeweten en
+zijn zwarte achtergrond. De app-iconen zijn daar rechtstreeks uit gemaakt: de
+PNG's zijn een uitsnede van het vossenkopje, en `icon.svg` is datzelfde beeld
+overgetrokken tot vectorpaden zodat het op elk formaat scherp blijft. Er is dus
+niets nagetekend of benaderd. Ze worden hier gebruikt met medeweten en
 toestemming van de organisatie: de maker van deze app zit zelf mee in het
 Fri3d-team.
 

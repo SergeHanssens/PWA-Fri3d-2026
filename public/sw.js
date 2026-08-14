@@ -1,7 +1,7 @@
 // Fri3d 2026 gezinsplanner — offline shell.
 // Bewust tolerant: als één bestand ontbreekt mag de installatie niet stukgaan,
 // want dan wordt de service worker nooit actief en is de app niet installeerbaar.
-const CACHE = 'fri3d2026-v6';
+const CACHE = 'fri3d2026-v7';
 const SHELL = [
   './', './manifest.json', './kaart.png',
   './icon-192.png', './icon-512.png', './icon.svg',
