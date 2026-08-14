@@ -1,5 +1,15 @@
 # Wijzigingen
 
+## 1.2.3 — augustus 2026
+
+- **Een potloodje bij elke persoon.** Tot nu kon je alleen bewerken wie je op dat
+  moment zélf was: om je kind te hernoemen moest je eerst je kind worden. In het
+  scherm *Wie ben je?* staat nu bij elke persoon een potloodje dat rechtstreeks
+  naam en avatar opent, zonder van identiteit te wisselen. Na het bewaren kom je
+  terug in de lijst, zodat je ze na elkaar kan afgaan.
+- Onderaan staat het **versienummer**. Zonder dat is niet na te gaan of een
+  toestel de nieuwste versie al binnen heeft.
+
 ## 1.2.2 — augustus 2026
 
 Namen en avatars komen eindelijk mee met de synchronisatie.

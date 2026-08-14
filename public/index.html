@@ -276,11 +276,19 @@ dialog .chip{min-height:var(--tap)}
 dialog .chip[aria-pressed="true"]{background:var(--purple);border-color:var(--purple);color:var(--on-purple)}
 
 .who-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.6rem}
-.who-grid button{padding:.7rem .4rem;border-radius:13px;border:2px solid var(--line-2);
+.who-grid .pcard{position:relative;display:flex}
+.who-grid .pick{flex:1;padding:.7rem .4rem;border-radius:13px;border:2px solid var(--line-2);
   background:var(--panel);display:flex;flex-direction:column;align-items:center;gap:.3rem;
   font-family:var(--disp);font-size:1rem;font-weight:700}
-.who-grid button[aria-pressed="true"]{border-color:var(--purple);box-shadow:var(--shadow);
+.who-grid .pick[aria-pressed="true"]{border-color:var(--purple);box-shadow:var(--shadow);
   background:var(--purple-soft)}
+/* Het potloodje bewerkt die ene persoon, zonder dat je eerst zelf die persoon
+   moet worden. Een ouder past zo de naam van zijn kind aan zonder van
+   identiteit te wisselen. Volledig tikdoel van 44 px, maar visueel klein. */
+.who-grid .edit{position:absolute;top:0;right:0;width:44px;height:44px;padding:0;
+  border:0;background:none;color:var(--ink-3);font-size:.85rem;line-height:1;
+  display:grid;place-items:center;border-radius:13px}
+.who-grid .edit:hover{color:var(--purple-ink)}
 .who-grid .av{width:42px;height:42px;border-radius:50%;overflow:hidden;display:grid;
   place-items:center;background:var(--pc,#999);color:#fff;font-size:1.1rem;flex:none}
 .who-grid .cnt{font-family:var(--mono);font-size:.64rem;font-weight:400;color:var(--ink-3)}
@@ -325,6 +333,8 @@ dialog .chip[aria-pressed="true"]{background:var(--purple);border-color:var(--pu
 .card.ic .kn a{font-family:var(--mono);font-size:.64rem;letter-spacing:.05em;text-transform:uppercase;
   padding:.32rem .55rem;border-radius:9px;border:1.5px solid var(--purple);color:var(--purple-ink);
   text-decoration:none;font-weight:700;display:inline-flex;align-items:center;gap:.3rem;min-height:34px}
+footer .versie{font-family:var(--mono);font-size:.68rem;letter-spacing:.06em;
+  color:var(--ink-3)}
 .infonote{margin:0 0 .7rem;padding:.55rem .75rem;border-radius:12px;background:var(--panel);
   border:1px dashed var(--line-2);font-size:.82rem;color:var(--ink-2);line-height:1.45}
 
@@ -389,6 +399,7 @@ dialog .chip[aria-pressed="true"]{background:var(--purple);border-color:var(--pu
     Code onder MIT-licentie — <a href="https://github.com/SergeHanssens/PWA-Fri3d-2026" target="_blank" rel="noopener">broncode op GitHub</a>.
     Programma, kaart en vossenlogo zijn van Fri3d Camp en worden met toestemming gebruikt.
   </p>
+  <p class="versie" style="margin:0">versie <span id="versie"></span></p>
 </footer>
 
 <div class="readbar">
@@ -1023,9 +1034,13 @@ function avatarHtml(id, cls){
 }
 function renderWho(){
   $("#whoGrid").innerHTML = peopleList().map(([k,l])=>
-    `<button data-me="${k}" aria-pressed="${k===st.me}" style="--pc:${colorOf(k)}">`
-    + `${avatarHtml(k)}<span>${esc(l)}</span>`
-    + `<span class="cnt">${planCount(k)} sessies</span></button>`
+    `<div class="pcard">`
+    + `<button class="pick" data-me="${k}" aria-pressed="${k===st.me}" style="--pc:${colorOf(k)}">`
+    +   `${avatarHtml(k)}<span>${esc(l)}</span>`
+    +   `<span class="cnt">${planCount(k)} sessies</span></button>`
+    + `<button class="edit" data-edit="${esc(k)}" title="Naam en avatar aanpassen"`
+    +   ` aria-label="Naam en avatar van ${esc(l)} aanpassen">✎</button>`
+    + `</div>`
   ).join("");
   const b = $("#btnMe");
   if(st.me){
@@ -1044,6 +1059,8 @@ function renderWho(){
   }
 }
 $("#whoGrid").addEventListener("click", e=>{
+  const ed = e.target.closest("[data-edit]");
+  if(ed){ editReturn = true; openPerson(ed.dataset.edit); return }
   const b=e.target.closest("[data-me]"); if(!b) return;
   st.me=b.dataset.me; store.set("me",st.me);
   st.cat="people"; st.tab=st.me; store.set("cat","people"); store.set("tab",st.tab);
@@ -1053,7 +1070,12 @@ $("#btnMe").onclick = ()=>{ renderWho(); renderNotifState(); dlgMe.showModal() }
 
 /* --- personen beheren --- */
 const dlgPerson = $("#dlgPerson");
-let editing = null;   // null = nieuwe persoon
+let editing = null;      // null = nieuwe persoon
+let editReturn = false;  // geopend via het potloodje: daarna terug naar de lijst
+function closePerson(){
+  dlgPerson.close();
+  if(editReturn){ editReturn = false; renderWho(); try{ dlgMe.showModal() }catch(e){} }
+}
 let avPick = "";
 function renderAvatars(){
   $("#pAvatars").innerHTML = AVATARS.map(a=>
@@ -1096,7 +1118,7 @@ function openPerson(id){
 }
 $("#btnAddPerson").onclick = ()=> openPerson(null);
 $("#btnEditPerson").onclick = ()=> st.me ? openPerson(st.me) : openPerson(null);
-$("#pCancel").onclick = ()=> dlgPerson.close();
+$("#pCancel").onclick = closePerson;
 $("#pSave").onclick = ()=>{
   const naam = $("#pName").value.trim();
   if(!naam){ $("#pMsg").textContent = "Geef eerst een naam."; return }
@@ -1112,7 +1134,7 @@ $("#pSave").onclick = ()=>{
   }
   saveRoster(); ensurePlans(); store.set("plans", plans);
   famTouch(editing || st.me);
-  dlgPerson.close(); renderWho(); render(); renderNotifState();
+  closePerson(); renderWho(); render(); renderNotifState();
 };
 $("#pDelete").onclick = ()=>{
   if(!editing) return;
@@ -1129,7 +1151,7 @@ $("#pDelete").onclick = ()=>{
   if(st.me === editing){ st.me = (peopleList()[0]||["",""])[0]; store.set("me", st.me); st.tab = st.me; store.set("tab", st.tab) }
   famSync();
   $("#pDelete").dataset.armed = "0"; $("#pDelete").textContent = "Verwijderen";
-  dlgPerson.close(); renderWho(); render(); renderNotifState();
+  closePerson(); renderWho(); render(); renderNotifState();
 };
 $("#dlgMeClose").onclick = ()=> dlgMe.close();
 $("#resetPlan").onclick = ()=>{
@@ -1972,6 +1994,11 @@ async function sync(silent){
 
 
 /* ---------- start ---------- */
+/* Staat in de voettekst. Zonder dit is van buitenaf niet te zien welke versie
+   er op een toestel draait, en dat maakt "ik heb ververst maar zie het niet"
+   onmogelijk om na te gaan. */
+const VERSIE = "1.2.3";
+$("#versie").textContent = VERSIE;
 render();
 if(!st.me){ try{ dlgMe.showModal() }catch(e){} }
 const last = store.get("lastSync",0);
