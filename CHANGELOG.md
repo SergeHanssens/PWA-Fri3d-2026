@@ -1,5 +1,21 @@
 # Wijzigingen
 
+## 1.2.0 — augustus 2026
+
+Een tabblad Info, zodat niemand nog in zijn mails hoeft te zoeken.
+
+- Nieuw tabblad **Info** met tien blokken kampinformatie: aankomen en inchecken,
+  brandveiligheid, stroom en daisychainen, eten en drinken, sanitair, wat je
+  meeneemt, community shift, de badge, contact, en het einde op zondag.
+- Elk blok heeft een eigen voorleesknop; de balk onderaan wordt *Lees info voor*
+  en leest de tien blokken na elkaar, met dezelfde markering als bij de sessies.
+- Vijftien links naar de echte bronnen: terreinplan, checklist, gedragscode,
+  badge-documentatie, Fri3d IDE, MicroPythonOS, het volledige programma.
+  Bewust géén links uit de nieuwsbrief — die lopen via een tracker en bevatten
+  het e-mailadres van de ontvanger.
+- De informatie zit in het bestand ingebakken, dus ze werkt ook zonder netwerk.
+  Precies wanneer je ze nodig hebt: op een veld, zonder bereik.
+
 ## 1.1.0 — augustus 2026
 
 Eigen vormgeving, en geen persoonsgegevens meer in de broncode.

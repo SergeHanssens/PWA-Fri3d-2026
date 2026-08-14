@@ -293,6 +293,23 @@ dialog .chip[aria-pressed="true"]{background:var(--purple);border-color:var(--pu
 #mapCv{display:block;width:100%;height:auto}
 #dlgMap{max-width:min(94vw,920px);width:min(94vw,920px)}
 
+/* ---------------- kampinfo ---------------- */
+.info{max-width:840px;margin:0 auto;padding:.65rem .75rem 5.5rem}
+.card.ic{display:block;padding:.85rem .9rem}
+.card.ic h3{display:flex;align-items:baseline;gap:.5rem;margin:0 0 .4rem;font-size:1.06rem}
+.card.ic h3 .em{font-size:1.15rem;flex:none;line-height:1}
+.card.ic ul{margin:0;padding-left:1.1rem;font-size:.92rem;color:var(--ink-2)}
+.card.ic li{margin:.3rem 0;line-height:1.5}
+.card.ic .kn{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.6rem}
+.card.ic .kn a{font-family:var(--mono);font-size:.64rem;letter-spacing:.05em;text-transform:uppercase;
+  padding:.32rem .55rem;border-radius:9px;border:1.5px solid var(--purple);color:var(--purple-ink);
+  text-decoration:none;font-weight:700;display:inline-flex;align-items:center;gap:.3rem;min-height:34px}
+.card.ic .say{margin-top:.6rem;font-family:var(--mono);font-size:.64rem;letter-spacing:.05em;
+  text-transform:uppercase;padding:.3rem .55rem;border-radius:9px;border:1.5px solid var(--ok);
+  color:var(--ok-ink);font-weight:700;min-height:36px}
+.infonote{margin:0 0 .7rem;padding:.55rem .75rem;border-radius:12px;background:var(--panel);
+  border:1px dashed var(--line-2);font-size:.82rem;color:var(--ink-2);line-height:1.45}
+
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 @media (min-width:620px){ .who-grid{grid-template-columns:repeat(4,1fr)} }
 </style>
@@ -326,6 +343,7 @@ dialog .chip[aria-pressed="true"]{background:var(--purple);border-color:var(--pu
     <button role="tab" data-cat="prep"    aria-selected="false">Praktisch</button>
     <button role="tab" data-cat="rooms"   aria-selected="false">Locaties</button>
     <button role="tab" data-cat="all"     aria-selected="false">Alles</button>
+    <button role="tab" data-cat="info"    aria-selected="false">Info</button>
   </div>
   <div class="chips" id="chips"></div>
   <div class="days" id="days"></div>
@@ -336,6 +354,7 @@ dialog .chip[aria-pressed="true"]{background:var(--purple);border-color:var(--pu
 <div class="nextup" id="nextUp" hidden></div>
 <div id="bannerSlot"></div>
 <main id="list"></main>
+<section class="info" id="infoPanel" hidden></section>
 
 <footer>
   <div class="logos">
@@ -735,6 +754,118 @@ function renderBanner(){
   $("#clearLog").onclick = ()=>{ changelog=[]; store.set("changelog",[]); renderBanner() };
 }
 
+/* ---------- Kampinfo ----------
+   Samengevat uit de mails van Fri3d Camp orga (29/7 – 12/8/2026) en fri3d.be.
+   Staat volledig in dit bestand, dus ook zonder netwerk beschikbaar. */
+const INFO = [
+ {i:"⛺", t:"Aankomen en inchecken", l:[
+  "Donderdag 13 augustus vanaf 15 uur ben je welkom op De Kluis in Sint-Joris-Weert met je kampeerspullen. Kom je vrijdag, dan kan je op het terrein vanaf 8 uur.",
+  "Vrijdag 14 augustus om 10 uur verzamelt iedereen aan het hoofdpodium voor de officiële aftrap.",
+  "Aan de ingang staat een parkeerwachter. Die stuurt je naar de juiste parking voor je wagen, camper of caravan.",
+  "Met de tent? Ga eerst even op verkenning voor je ze neerzet. Er zijn nieuwe kampeerterreinen bijgekomen sinds vorige editie. Campingwachters helpen je verder.",
+  "Plaats vrijhouden voor wie later komt mag, maar hou het excellent: zorg dat iedereen genoeg ruimte heeft.",
+  "Inchecken doe je aan de infodesk. Daar krijg je je polsbandje, je badge en je survival guide. Hou het overzicht van je bestelling klaar — de aanmeldcode staat rechtsboven en gaat het snelst.",
+  "Het terrein is rondom afgebakend met een lint, zodat de grens ook voor de kleinsten duidelijk is."
+ ], k:[["Terreinplan (pdf)","https://fri3d.be/downloads/grondplan_2026_print.pdf"],
+       ["Alles voor deelnemers","https://fri3d.be/deelnemen/"],
+       ["Be Excellent — de gedragscode","https://fri3d.be/deelnemen/excellent/"]]},
+
+ {i:"🔥", t:"Brandveiligheid — er geldt code oranje", l:[
+  "Het is droog en we kamperen met veel mensen in een natuurdomein. Open vuur is strikt verboden.",
+  "Niet koken op een gasfornuis, ook niet in een caravan of camper. Geen barbecue, ook geen gasbarbecue.",
+  "Geen koelkast op gas, en breng geen gasflessen mee — hoe klein ook.",
+  "Geen kampvuur en geen vuurkorf.",
+  "Roken en vapen mogen niet op het terrein. Op de parking van het hoofdgebouw is een rookplek voorzien.",
+  "Er is elke dag warm avondeten. Op een centrale plek op het hoofdterrein kan je koken op inductie en elektrische kookplaten — breng daar geschikte potten en pannen voor mee.",
+  "Bij de koelkasten staan microgolfovens. Aan de bar is doorlopend koffie, thee en heet water te krijgen, bijvoorbeeld voor noedelsoep.",
+  "Tip van de organisatie: neem de brandblusser uit je wagen mee naar je tent. Er staan ook brandblussers op het terrein.",
+  "Breng extra ledlampjes mee. Rode en oranje knipperlichtjes maken het net zo gezellig als een vuurtje."
+ ], k:[]},
+
+ {i:"🔌", t:"Stroom: hoe je veilig aansluit", l:[
+  "Je hebt zelf een verlengkabel en een stekkerblok nodig. Iedereen sluit op elkaar aan — dat heet daisychainen.",
+  "Breng degelijk materiaal mee. Versleten stekkerblokken of kabels met stukken uit kunnen vonken geven of de stroom doen uitvallen.",
+  "Leg stekkerblokken nooit op de grond. Hang ze hoog en dek ze af met een plastic zak, dan zit je meteen goed bij regen.",
+  "Aan de infodesk krijg je daar materiaal voor, en tonen ze hoe het veilig kan.",
+  "De organisatie mag onveilige toestanden weghalen. Dan kan een stuk van het kamp zonder stroom vallen — dus doe het meteen goed."
+ ], k:[["Wat is daisychainen?","https://en.wikipedia.org/wiki/Daisy_chain_(electrical_engineering)"]]},
+
+ {i:"🍲", t:"Eten en drinken", l:[
+  "Donderdagavond vanaf 18 uur is er gratis soep met brood voor wie er al is.",
+  "Vrijdag- en zaterdagavond is er een uitgebreide warme maaltijd. Die zit in de kampprijs.",
+  "Ontbijt en lunch breng je zelf mee.",
+  "De bar is open vanaf donderdag 15 uur: drankjes en snacks zoals croques, hotdogs, loempia's, chips, ijsjes en suikerwafels. Je betaalt met de barkaart, die koop je aan de infodesk.",
+  "Op de kampeerterreinen staan koelkasten voor etenswaren die kunnen bederven. Niet voor je drank — daar is geen plaats voor.",
+  "Steek wat cash op zak voor een bijdrage aan een workshop of een aankoop ter plaatse. Payconiq installeren kan ook geen kwaad."
+ ], k:[["Payconiq activeren","https://www.payconiq.be/nl/particulier/activeer-payconiq-by-bancontact"]]},
+
+ {i:"🚿", t:"Sanitair en je kampeerplek", l:[
+  "De sanitaire blokken worden schoongehouden. Een extra rol toiletpapier in je bagage kan handig zijn, mocht er even schaarste zijn.",
+  "Traditiegetrouw worden de kampeerplekken versierd met veel kleurige lampjes. Breng er zoveel mee als je kan."
+ ], k:[]},
+
+ {i:"🎒", t:"Wat je zeker meeneemt", l:[
+  "Papieren: het overzicht van je bestelling met je aanmeldcode, en een bankkaart.",
+  "Kamperen: tent, slaapzak of dekens, kussen, luchtmatras of veldbed met pomp, zaklamp of hoofdlamp.",
+  "Verzorging: toiletgerief, medicatie, toiletpapier, handdoek, extra trui, pet of zonnehoed, zonnecrème en een kleine EHBO-kit.",
+  "Eten: bord en bestek voor de gezamenlijke maaltijden, en een drinkbus.",
+  "Techniek: laptop met een back-up van je data, usb-c-kabel, micro-sd-kaartje, breadboard en componenten voor je badge, verlengkabel en stekkerblok.",
+  "Sfeer: lichtjes, een kampstoel of tafeltje, en een vuilniszak.",
+  "Voor sommige workshops moet je zelf gereedschap of materiaal meebrengen. Kijk dat na op het tabblad Praktisch."
+ ], k:[["De volledige checklist","https://fri3d.be/deelnemen/checklist/"]]},
+
+ {i:"🤝", t:"Community shift", l:[
+  "Fri3d Camp draait op de inzet van de deelnemers. Zonder shifts is het kamp niet te organiseren.",
+  "Meer dan één shift aanduiden mag zeker — vele handen maken het werk licht.",
+  "Je persoonlijke keuzelink stond in de mail van eind juli. Nog niet gekozen? Dan kan het bij aankomst aan de infodesk."
+ ], k:[]},
+
+ {i:"🦊", t:"De badge en zelf programmeren", l:[
+  "De badge van 2026 kan technisch een pak meer dan de vorige. Alle technische informatie staat op de documentatiepagina.",
+  "Zelf iets programmeren kan met MicroPythonOS. Je kan testen op je oude badge, of in de browser met de virtuele badge in de Fri3d IDE."
+ ], k:[["Badge 2026 — documentatie","https://fri3dcamp.github.io/badge_2026/"],
+       ["Fri3d IDE (virtuele badge)","https://fri3dcamp.github.io/Fri3d-IDE/"],
+       ["MicroPythonOS","https://docs.micropythonos.com/"],
+       ["Programmeren, stap voor stap","https://fri3dcamp.github.io/badge_2026/programming/"],
+       ["De badge flashen","https://fri3dcamp.github.io/fri3d-web-flasher/"]]},
+
+ {i:"💬", t:"Vragen en contact", l:[
+  "Praktische vragen op het terrein: ga naar de infodesk.",
+  "Op Discord is #infodesk het kanaal voor praktische vragen, #stel-jezelf-voor om jezelf voor te stellen, en #parents voor ouders onder elkaar. De uitnodiging staat in je inschrijvingsmail, of vraag ze aan de infodesk.",
+  "Algemene vragen per mail: info@fri3d.be. Vragen over het programma: content@fri3d.be."
+ ], k:[["info@fri3d.be","mailto:info@fri3d.be"],
+       ["content@fri3d.be","mailto:content@fri3d.be"],
+       ["Het volledige programma","https://pretalx.fri3d.be/fri3dcamp2026/schedule/"],
+       ["fri3d.be","https://fri3d.be/"]]},
+
+ {i:"👋", t:"Het einde — zondag", l:[
+  "Zondagnamiddag om 15 uur is het afsluitmoment.",
+  "Daarna ruimen we samen het terrein op. Als iedereen meehelpt, gaat het snel.",
+  "Vervolgens ruim je je eigen kampeerplek op en kan je vertrekken. Vanaf dan is het kamp een blije herinnering."
+ ], k:[]}
+];
+
+function infoText(b){ return b.t + ". " + b.l.join(" "); }
+function renderInfo(){
+  $("#infoPanel").innerHTML =
+    `<p class="infonote">Samengevat uit de mails van Fri3d Camp orga en van
+      <a href="https://fri3d.be/" target="_blank" rel="noopener">fri3d.be</a>. Staat mee in de app,
+      dus ook zonder netwerk. Bij twijfel geldt altijd wat de organisatie zelf zegt.</p>` +
+    INFO.map((b,i)=>
+      `<article class="card ic" data-k="info:${i}">`
+      + `<h3><span class="em" aria-hidden="true">${b.i}</span>${esc(b.t)}</h3>`
+      + `<ul>` + b.l.map(x=>`<li>${esc(x)}</li>`).join("") + `</ul>`
+      + (b.k.length ? `<p class="kn">` + b.k.map(([t,u])=>
+          `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(t)} ↗</a>`).join("") + `</p>` : "")
+      + `<button class="say" data-info="${i}" data-say="1">🔊 Lees voor</button>`
+      + `</article>`).join("");
+}
+$("#infoPanel").addEventListener("click", e=>{
+  const b = e.target.closest("button[data-info]"); if(!b) return;
+  const blk = INFO[+b.dataset.info]; if(!blk) return;
+  stopSpeak(); queue=[{k:`info:${b.dataset.info}`, txt:infoText(blk)}]; qi=0; runQueue();
+});
+
 function renderRoomBar(){
   const el = $("#roomBar");
   if(st.cat === "ages"){
@@ -756,7 +887,25 @@ function renderRoomBar(){
   el.innerHTML = `<button data-map="${esc(room)}">📍 Toon ${esc(MAPLOC.rooms[room].n)} op de kaart</button>`;
   el.querySelector("button").onclick = ()=> showMap(room);
 }
-function render(){ renderNav(); renderList(); renderBanner(); renderRoomBar(); }
+function render(){
+  const isInfo = st.cat === "info";
+  $("#infoPanel").hidden = !isInfo;
+  $("#list").hidden = isInfo;
+  $("#chips").hidden = isInfo; $("#days").hidden = isInfo;
+  document.querySelector(".searchwrap").hidden = isInfo;
+  if(isInfo){
+    $("#roomBar").hidden = true; $("#nextUp").hidden = true; $("#bannerSlot").hidden = true;
+    $("#btnReadAll").textContent = "▶︎ Lees info voor";
+    renderNav_tabsOnly(); renderInfo(); return;
+  }
+  $("#bannerSlot").hidden = false;
+  $("#btnReadAll").textContent = "▶︎ Lees lijst voor";
+  renderNav(); renderList(); renderBanner(); renderRoomBar();
+}
+function renderNav_tabsOnly(){
+  $(".seg").querySelectorAll("button").forEach(b=>
+    b.setAttribute("aria-selected", String(b.dataset.cat===st.cat)));
+}
 
 /* ---------- events ---------- */
 $(".seg").addEventListener("click", e=>{
@@ -1616,7 +1765,7 @@ function runQueue(){
   const s = queue[qi];
   highlight(s.k);
   $("#readStatus").textContent = `${qi+1}/${queue.length}`;
-  const u = utter(sentenceFor(s));
+  const u = utter(s.txt || sentenceFor(s));
   u.onend = ()=>{ qi++; runQueue() };
   u.onerror = ()=>{ qi++; runQueue() };
   synth.speak(u);
@@ -1655,6 +1804,11 @@ function speakOne(s){
 }
 $("#btnReadAll").onclick = ()=>{
   if(!synth){ $("#readStatus").textContent="geen spraak beschikbaar"; return }
+  if(st.cat === "info"){
+    stopSpeak(); queue = INFO.map((b,i)=>({k:`info:${i}`, txt:infoText(b)})); qi=0;
+    const kop = utter(`Kampinfo. ${queue.length} onderdelen.`);
+    kop.onend = runQueue; kop.onerror = runQueue; synth.speak(kop); return;
+  }
   stopSpeak(); queue = filtered().slice(0,40); qi=0;
   if(!queue.length) return;
   const label = (tabsFor(st.cat).find(([k])=>k===st.tab)||["","lijst"])[1];

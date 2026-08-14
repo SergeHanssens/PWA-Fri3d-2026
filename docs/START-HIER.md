@@ -104,7 +104,7 @@ Doe dit op elke telefoon die hem gaat gebruiken.
 1. Open **Chrome**. Niet de browser die opent als je op een link in WhatsApp
    tikt — dat is een andere. Start Chrome zelf vanaf je startscherm.
 2. Typ of plak het webadres van stap 1.6.
-3. Wacht enkele seconden. Bovenaan verschijnt een groen **⤓**-knopje.
+3. Wacht enkele seconden. Bovenaan verschijnt een blauwgroen **⤓**-knopje.
 4. Tik erop en bevestig. Het icoontje met de vos staat nu op je startscherm.
 
 Zie je dat knopje niet? Tik dan rechtsboven op de drie puntjes **⋮** en kies

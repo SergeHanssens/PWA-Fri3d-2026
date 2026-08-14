@@ -9,7 +9,7 @@ in te stellen — je kreeg een link, en dat volstaat.
 
 **Zet de app op je startscherm.** Open de link die je kreeg.
 
-- *Android:* open hem in **Chrome** en tik bovenaan op het groene **⤓**-knopje.
+- *Android:* open hem in **Chrome** en tik bovenaan op het blauwgroene **⤓**-knopje.
   Zie je dat niet, tik dan op de drie puntjes **⋮** en kies *App installeren*.
 - *iPhone:* open hem in **Safari**, tik op het deelknopje onderaan en kies
   *Zet op beginscherm*.
@@ -72,7 +72,7 @@ het grijze kadertje.
 **📦 Wordt voorzien** — de begeleider brengt het materiaal zelf mee, jij hoeft
 niets te doen.
 
-Een activiteit met een **oranje streep aan de linkerkant** vraagt dus enige
+Een activiteit met een **amberkleurige streep aan de linkerkant** vraagt dus enige
 voorbereiding.
 
 ---
@@ -101,7 +101,7 @@ Via 🎚 kan je nog kiezen:
 ---
 
 > **Zie je een lege lijst?** Dan staat er nog een filter aan van daarnet, meestal
-> een bepaalde dag. De app zegt dat er nu bij en toont een oranje knop om het in
+> een bepaalde dag. De app zegt dat er nu bij en toont een paarse knop om het in
 > één tik op te lossen.
 
 ## Waar is het?
@@ -115,8 +115,28 @@ dat ene icoontje **in het rood** — ook in de legende rechts, zodat je meteen
 weet naar welk symbool je zoekt. Met **Hele kaart** zoom je uit naar het
 volledige terrein.
 
-Kies je bovenaan **Locaties** en dan een zaal, dan verschijnt er een groene balk
-*Toon … op de kaart*.
+Kies je bovenaan **Locaties** en dan een zaal, dan verschijnt er een blauwgroene
+balk *Toon … op de kaart*.
+
+---
+
+## Alles over het kamp zelf
+
+<p align="center">
+  <img src="screenshots/08-info.png" alt="Het tabblad Info" width="300">
+</p>
+
+Onder **Info** — het laatste tabblad — staat wat de organisatie je per mail
+stuurde, samengebracht op één plek: vanaf wanneer je welkom bent en hoe je
+incheckt, de regels rond brandveiligheid, hoe je veilig stroom aansluit, wat er
+te eten is en wanneer, wat je zeker meeneemt, en bij wie je terechtkan met een
+vraag. Onderaan elk blok staan de links naar de officiële pagina's.
+
+Alles staat mee in de app, dus je hebt er geen bereik voor nodig. Handig, want
+net op een veld werkt je internet meestal niet.
+
+Elk blok heeft een eigen **🔊 Lees voor**-knop, en met de grote knop onderaan
+laat je alles na elkaar voorlezen.
 
 ---
 

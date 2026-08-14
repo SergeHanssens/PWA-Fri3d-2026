@@ -75,7 +75,8 @@ telefoon af, ook als de app dicht is.
 
 | | |
 |---|---|
-| **Tabbladen** | Per persoon, per onderwerp, per leeftijd, per praktische vereiste, per locatie, en alles |
+| **Tabbladen** | Per persoon, per onderwerp, per leeftijd, per praktische vereiste, per locatie, alles, en Info |
+| **Info** | Alles uit de mails van de organisatie op één plek: aankomst, brandveiligheid, stroom, eten, meebrengen, contact — met de juiste links, en voorleesbaar |
 | **Leeftijd** | Alleen wat de sessies zélf vermelden, plus de twee kinderzalen — geen gokwerk |
 | **Praktisch** | Eigen tabblad met 🎒 meebrengen, 💶 kost iets en 💻 laptop nodig, met de letterlijke zin erbij |
 | **Eigen planning** | Tik een sessie bij eender wie in of uit; iedereen vertrekt van een voorstel |
@@ -130,11 +131,20 @@ kinderzalen. Het kader zegt er eerlijk bij wat er níét in staat.</sub>
 </tr>
 </table>
 
-<p align="center">
-  <img src="docs/screenshots/07-voorlezen.png" alt="Instellingen voor voorlezen" width="300">
-</p>
-<p align="center"><sub><b>Voorlezen.</b> Stem, tempo, en de schakelaar die ook knoppen
-en tabbladen uitspreekt zodra je ze aanraakt — voor wie niet vlot leest.</sub></p>
+<table>
+<tr>
+<td width="50%" valign="top">
+<img src="docs/screenshots/07-voorlezen.png" alt="Instellingen voor voorlezen">
+<sub><b>Voorlezen.</b> Stem, tempo, en de schakelaar die ook knoppen en tabbladen
+uitspreekt zodra je ze aanraakt — voor wie niet vlot leest.</sub>
+</td>
+<td width="50%" valign="top">
+<img src="docs/screenshots/08-info.png" alt="Het tabblad Info met kampinformatie">
+<sub><b>Info.</b> Wat anders in vier mails verspreid zit: aankomst, brandveiligheid,
+stroom, eten, contact. Elk blok heeft een eigen voorleesknop.</sub>
+</td>
+</tr>
+</table>
 
 ## Snel starten
 
@@ -292,6 +302,19 @@ het hoofd ziet.
 Geen Pretalx? Vervang dan de functie `flatten()` in de template en de leeslus in
 `build.py`; alles daarna werkt op een eenvoudige lijst met velden voor datum,
 uur, duur, zaal, titel, sprekers, taal en beschrijving.
+
+### Het tabblad Info aanpassen
+
+De kampinformatie staat als één lijst `INFO` bovenaan de renderfuncties in
+`build/app.template.html`. Elk blok is `{i, t, l, k}`: een emoji, een titel, een
+lijst zinnen, en een lijst links als `["tekst", "url"]`. Voeg een blok toe of
+haal er een weg, bouw opnieuw, klaar — de voorleesknoppen en de knop *Lees info
+voor* volgen vanzelf.
+
+Twee dingen om in gedachten te houden. Schrijf **volle zinnen**: ze worden ook
+hardop voorgelezen, dus "vanaf 15u" wordt beter "vanaf 15 uur". En zet er nooit
+links uit een nieuwsbrief in: die lopen doorgaans via een tracker en bevatten
+het e-mailadres van de ontvanger. Zoek de echte bestemming op.
 
 ## Vormgeving
 
