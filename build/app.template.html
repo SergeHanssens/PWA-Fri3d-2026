@@ -1406,7 +1406,12 @@ function famHeaders(extra){
 }
 async function famPull(){
   const url = `${fam.url.replace(/\/+$/,"")}/rest/v1/${TABLE}`
-            + `?group_id=eq.${encodeURIComponent(fam.grp)}&select=person,add,rm,ts`;
+            /* label, avatar en deleted moeten mee opgehaald worden: ze worden wél
+               weggeschreven, en famSync verwacht ze. Zonder deze velden komt een
+               naam die op één toestel gewijzigd werd nooit bij de rest terecht,
+               en staat een verwijderde persoon er op het volgende toestel weer. */
+            + `?group_id=eq.${encodeURIComponent(fam.grp)}`
+            + `&select=person,label,avatar,deleted,add,rm,ts`;
   const r = await fetch(url, {headers: famHeaders(), cache:"no-store"});
   if(!r.ok) throw new Error("lezen " + await famErr(r));
   return await r.json();

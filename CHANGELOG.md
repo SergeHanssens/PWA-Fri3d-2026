@@ -1,5 +1,18 @@
 # Wijzigingen
 
+## 1.2.2 — augustus 2026
+
+Namen en avatars komen eindelijk mee met de synchronisatie.
+
+- **Namen die je op één toestel aanpaste, kwamen nooit bij de rest terecht.** Ze
+  werden wél netjes weggeschreven naar je eigen Supabase, maar bij het ophalen
+  vroeg de app alleen `person, add, rm, ts` op — dus zonder `label`, `avatar` en
+  `deleted`. Die drie kolommen worden nu mee opgehaald. Bestond je groep al vóór
+  1.1.0, dan verschijnen je eigen namen en avatars vanzelf weer, ook al staan ze
+  in de database nog onder de oude persoonssleutels.
+- Om dezelfde reden stond een persoon die je op één toestel verwijderde er op het
+  volgende gewoon weer bij. Ook opgelost.
+
 ## 1.2.1 — augustus 2026
 
 Herstel: lege lijsten na de hernoeming van 1.1.0.
