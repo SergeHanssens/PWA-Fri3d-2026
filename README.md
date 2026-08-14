@@ -311,6 +311,11 @@ lijst zinnen, en een lijst links als `["tekst", "url"]`. Voeg een blok toe of
 haal er een weg, bouw opnieuw, klaar — de voorleesknoppen en de knop *Lees info
 voor* volgen vanzelf.
 
+Zet er `INFO_BIJGEWERKT` en `INFO_BRON` boven op de juiste waarde. Die twee
+verschijnen in het kader bovenaan het tabblad en in de gesproken inleiding, zodat
+een deelnemer meteen ziet tot wanneer de informatie loopt. Vergeet je dat, dan
+staat er met evenveel stelligheid iets van vorige maand.
+
 Twee dingen om in gedachten te houden. Schrijf **volle zinnen**: ze worden ook
 hardop voorgelezen, dus "vanaf 15u" wordt beter "vanaf 15 uur". En zet er nooit
 links uit een nieuwsbrief in: die lopen doorgaans via een tracker en bevatten

@@ -15,6 +15,9 @@ Een tabblad Info, zodat niemand nog in zijn mails hoeft te zoeken.
   het e-mailadres van de ontvanger.
 - De informatie zit in het bestand ingebakken, dus ze werkt ook zonder netwerk.
   Precies wanneer je ze nodig hebt: op een veld, zonder bereik.
+- Bovenaan het tabblad staat tot wanneer de informatie loopt en waarop ze
+  gebaseerd is, met de melding dat een nieuwere mail altijd voorgaat. Dezelfde
+  datum hoor je in de gesproken inleiding.
 
 ## 1.1.0 — augustus 2026
 

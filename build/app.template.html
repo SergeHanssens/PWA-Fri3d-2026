@@ -757,6 +757,10 @@ function renderBanner(){
 /* ---------- Kampinfo ----------
    Samengevat uit de mails van Fri3d Camp orga (29/7 – 12/8/2026) en fri3d.be.
    Staat volledig in dit bestand, dus ook zonder netwerk beschikbaar. */
+/* Wanneer deze informatie voor het laatst is nagekeken, en tot welke mail ze
+   loopt. Aanpassen zodra er nieuwe communicatie binnenkomt. */
+const INFO_BIJGEWERKT = "14 augustus 2026";
+const INFO_BRON = "de mails van 29 juli tot 12 augustus 2026";
 const INFO = [
  {i:"⛺", t:"Aankomen en inchecken", l:[
   "Donderdag 13 augustus vanaf 15 uur ben je welkom op De Kluis in Sint-Joris-Weert met je kampeerspullen. Kom je vrijdag, dan kan je op het terrein vanaf 8 uur.",
@@ -848,9 +852,11 @@ const INFO = [
 function infoText(b){ return b.t + ". " + b.l.join(" "); }
 function renderInfo(){
   $("#infoPanel").innerHTML =
-    `<p class="infonote">Samengevat uit de mails van Fri3d Camp orga en van
+    `<p class="infonote"><b>Bijgewerkt op ${esc(INFO_BIJGEWERKT)}.</b>
+      Samengevat uit ${esc(INFO_BRON)} van Fri3d Camp orga en uit
       <a href="https://fri3d.be/" target="_blank" rel="noopener">fri3d.be</a>. Staat mee in de app,
-      dus ook zonder netwerk. Bij twijfel geldt altijd wat de organisatie zelf zegt.</p>` +
+      dus ook zonder netwerk. Kwam er nadien nog een mail? Dan geldt die, en niet
+      wat hieronder staat.</p>` +
     INFO.map((b,i)=>
       `<article class="card ic" data-k="info:${i}">`
       + `<h3><span class="em" aria-hidden="true">${b.i}</span>${esc(b.t)}</h3>`
@@ -1806,7 +1812,7 @@ $("#btnReadAll").onclick = ()=>{
   if(!synth){ $("#readStatus").textContent="geen spraak beschikbaar"; return }
   if(st.cat === "info"){
     stopSpeak(); queue = INFO.map((b,i)=>({k:`info:${i}`, txt:infoText(b)})); qi=0;
-    const kop = utter(`Kampinfo. ${queue.length} onderdelen.`);
+    const kop = utter(`Kampinfo, bijgewerkt op ${INFO_BIJGEWERKT}. ${queue.length} onderdelen.`);
     kop.onend = runQueue; kop.onerror = runQueue; synth.speak(kop); return;
   }
   stopSpeak(); queue = filtered().slice(0,40); qi=0;
